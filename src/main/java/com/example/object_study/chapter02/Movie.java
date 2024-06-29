@@ -1,5 +1,7 @@
 package com.example.object_study.chapter02;
 
+import com.example.object_study.chapter02.policy.DiscountPolicy;
+
 import java.time.Duration;
 
 public class Movie {

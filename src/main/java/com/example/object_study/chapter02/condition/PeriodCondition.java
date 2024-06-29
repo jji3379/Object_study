@@ -1,4 +1,6 @@
-package com.example.object_study.chapter02;
+package com.example.object_study.chapter02.condition;
+
+import com.example.object_study.chapter02.Screening;
 
 import java.time.DayOfWeek;
 import java.time.LocalTime;
