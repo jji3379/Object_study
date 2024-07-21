@@ -1,6 +1,7 @@
 package com.example.object_study.chapter04;
 
 import com.example.object_study.chapter02.Money;
+import com.example.object_study.chapter05.Screening;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -58,5 +59,43 @@ public class Movie {
         }
 
         return false;
+    }
+
+    public Money calculateMovieFee(Screening screening) {
+        if (isDiscountable(screening)) {
+            return fee.minus(calculateDisountAmount());
+        }
+
+        return fee;
+    }
+
+    private boolean isDiscountable(Screening screening) {
+        return discountConditions.stream()
+                .anyMatch(condition -> condition.isSatisfiedBy(screening));
+    }
+
+    private Money calculateDisountAmount() {
+        switch (movieType) {
+            case AMOUNT_DISCOUNT:
+                return calculateAmountDiscountAmount();
+            case PERCENT_DISCOUNT:
+                return calculatePercentDiscountAmount();
+            case NONE_DISCOUNT:
+                return calculateNoneDiscountAmount();
+        }
+
+        throw new IllegalStateException();
+    }
+
+    private Money calculateNoneDiscountAmount() {
+        return discountAmount;
+    }
+
+    private Money calculatePercentDiscountAmount() {
+        return fee.times(discountPercent);
+    }
+
+    private Money calculateAmountDiscountAmount() {
+        return Money.ZERO;
     }
 }
